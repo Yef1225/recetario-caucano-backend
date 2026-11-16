@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Receta
+from .serializers import RecetaSerializer
 
-# Create your views here.
+class RecetaViewSet(viewsets.ModelViewSet):
+    queryset = Receta.objects.all().order_by('-fecha_creacion')
+    serializer_class = RecetaSerializer
