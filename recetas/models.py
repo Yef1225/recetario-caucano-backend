@@ -9,3 +9,19 @@ class Receta(models.Model):
 
     def __str__(self):
         return f"{self.nombre} ({self.municipio_origen})"
+    
+
+class Ingrediente(models.Model):
+    receta = models.ForeignKey(
+        Receta,
+        on_delete=models.CASCADE,
+        related_name='ingredientes'
+    )
+
+    nombre = models.CharField(max_length=100)
+    cantidad = models.CharField(max_length=50)
+    unidad_medida = models.CharField(max_length=30)
+    es_opcional = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.nombre} ({self.cantidad} {self.unidad_medida})"
